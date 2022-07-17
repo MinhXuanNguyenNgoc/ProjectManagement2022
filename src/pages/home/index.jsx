@@ -11,16 +11,17 @@ const options = [
   { value: "chinese", label: "Chinese" },
 ];
 function Home() {
-  const [test, setText] = useState("");
+  const [text, setText] = useState("");
 
   return (
     <div className="container">
       <div className="field">
         <h3 className="field__label">Text</h3>
-        <input
-          placeholder="Enter your text"
-          className="field__input"
+        <textarea
+          rows="6"
+          className="field__textarea"
           name="text"
+          placeholder="Enter your text"
         />
       </div>
 
@@ -37,7 +38,7 @@ function Home() {
 
       <button className="submit">
         <img className="submit__icon" src={icConvert} alt="Covert icon" />
-        <p className="submit__text">Covert</p>
+        <p className="submit__text">Convert</p>
       </button>
     </div>
   );
