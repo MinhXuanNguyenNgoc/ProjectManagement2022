@@ -1,0 +1,29 @@
+@import '../../App.sass'
+
+.nav
+  background: white
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  padding: 20px 0
+
+  @include element('title')
+    margin: 0
+
+  @include element('subtitle')
+    color: gray
+    margin: 5px 0
+
+  @include element('loginBtn')
+    background: $purple
+    border-radius: 3px
+    border: 0
+    padding: 10px
+    font-size: 14px
+    color: white
+    position: absolute
+    right: 20px
+    text-transform: uppercase
+    font-weight: bold
+    text-decoration: none

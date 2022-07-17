@@ -1,0 +1,52 @@
+@import '../../App.sass'
+
+.container
+  background: #f8f8f8
+  min-height: 85vh
+  padding-top: 50px
+
+.field
+  margin: auto
+  width: 30%
+
+  @include element('label')
+    font-weight: 400
+
+  @include element('input')
+    padding: 8px 10px
+    border: 0.5px solid #9a9a9a
+    border-radius: 8px
+    font-size: 18px
+    width: calc( 100% - 17px)
+
+  @include element('select')
+    font-size: 18px
+
+.submit
+  width: 30%
+  margin: auto
+  display: flex
+  margin-top: 32px
+  align-items: center
+  justify-content: center
+  position: relative
+  border: 0
+  background: $purple
+  border-radius: 8px
+  padding: 15px 15px
+
+  &:active
+    background: #AA98F4
+
+  @include element('icon')
+    width: 16px
+    height: 16px
+    position: absolute
+    left: 15px
+
+  @include element('text')
+    text-align: center
+    align-self: center
+    color: white
+    font-size: 20px
+    margin: 0

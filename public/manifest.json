@@ -1,0 +1,8 @@
+{
+  "short_name": "Text to speech",
+  "name": "Text to speech web application",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
