@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./signin.sass";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const accounts = [
   {username: "minhxuan123", password: "123456789"},
@@ -11,17 +11,14 @@ const accounts = [
 const SignIn = () => {
   const[user, setUsername] = useState('');
   const [pw, setPw] = useState('');
+  const navigate = useNavigate();
 
   const register = () =>{
     for (const element of accounts) {
-      if (user === element.username) {
-        if (pw === element.password) {
-          alert('Login successful!!!')
-          break;
-        }
-        else {
-          alert('Incorrect username or password')
-        }
+      const {username, password} = element;
+      if (user === username && pw === password) {
+        navigate("/")
+        localStorage.setItem("isLogin", username);
         break;
       }
       else{

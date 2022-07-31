@@ -5,16 +5,26 @@ import { useLocation } from 'react-router-dom';
 import ic_equalizer from '../../assets/ic_equalizer.png';
 import ic_skipbackward from '../../assets/ic_skip-backward.png';
 import ic_play from '../../assets/ic_play.png';
-import ic_pause from '../../assets/ic_pause.png';
 
 import ic_skipforward from '../../assets/ic_skip-forward.png';
 import ic_volumn from '../../assets/ic_volumn.png';
 import ic_download from '../../assets/ic_download.png';
 import ic_soundwave from '../../assets/ic_soundwave.png';
+import { saveAs } from 'file-saver';
 
 const PlaySound = () => {
   const location = useLocation();
 
+  const handleDownload =() =>{
+    const username = localStorage.getItem("isLogin");
+    if (username){
+      saveAs(location.state.data.link)
+    }
+    else{
+      alert("Please login to continue")
+    }
+    
+  }
   const playAudio = () => {
     const audio = new Audio(location.state?.data?.link);
 
@@ -65,17 +75,13 @@ const PlaySound = () => {
           src={ic_volumn}
           alt=""
         />
-        <a
-          download="audio.mp3"
-          target="_blank"
-          href={location.state.data.link}
-        >
+
           <img
+            onClick={handleDownload}
             className="icon download"
             src={ic_download}
             alt=""
           />
-        </a>
       </div>
       <div className="soundWave">
         <img
