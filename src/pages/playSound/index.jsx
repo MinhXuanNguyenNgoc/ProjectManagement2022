@@ -14,13 +14,13 @@ import ic_soundwave from '../../assets/ic_soundwave.png';
 
 const PlaySound = () => {
   const location = useLocation();
-  const audio = new Audio(location.state?.data?.link);
 
   const playAudio = () => {
+    const audio = new Audio(location.state?.data?.link);
+
     audio.play().catch((e) =>
       setTimeout(() => {
         {
-          console.log('!!!!');
           playAudio();
         }
       }, 1000),
