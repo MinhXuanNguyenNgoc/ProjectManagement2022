@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import textToSpeechApi from '../../api/ttsApi';
 import icConvert from '../../assets/ic_convert.png';
@@ -17,6 +18,7 @@ const genderOptions = [
 ];
 
 function Home() {
+  const navigate = useNavigate();
   const [text, setText] = useState('');
   const [voice, setVoice] = useState(voiceOptions[0]);
   const [gender, setGender] = useState(genderOptions[1]);
@@ -36,7 +38,6 @@ function Home() {
         voiceName = 'leminh';
       }
     } else {
-
       if (voice.value == 'central') {
         voiceName = 'myan';
       }
@@ -54,15 +55,20 @@ function Home() {
 
   const convert = async () => {
     const requestVoice = handleVoice();
+
     const response = await textToSpeechApi(
       text,
       requestVoice,
     );
+    const data = {
+      text,
+      voice: requestVoice,
+      link: response.data.async,
+    };
 
-    const audio = new Audio(response.data.async);
-    audio.play().then((res) => {
-      console.log('eehehhee');
-    });
+    console.log('data: ', data);
+    navigate('/play', { state: { data } });
+   
   };
   return (
     <div className="container">
