@@ -5,22 +5,64 @@ import icConvert from '../../assets/ic_convert.png';
 
 import './home.sass';
 
-const options = [
-  { value: 'english', label: 'English' },
-  { value: 'vietnamese', label: 'Vietnamese' },
-  { value: 'spanish', label: 'Spanish' },
-  { value: 'chinese', label: 'Chinese' },
+const voiceOptions = [
+  { value: 'north', label: 'North' },
+  { value: 'central', label: 'Central' },
+  { value: 'south', label: 'South' },
+];
+
+const genderOptions = [
+  { value: 'male', label: 'Male' },
+  { value: 'female', label: 'Female' },
 ];
 
 function Home() {
   const [text, setText] = useState('');
+  const [voice, setVoice] = useState(voiceOptions[0]);
+  const [gender, setGender] = useState(genderOptions[1]);
+
+  const handleVoice = () => {
+    let voiceName = '';
+    if (gender.value == 'male') {
+      if (voice.value == 'central') {
+        voiceName = 'giahuy';
+      }
+
+      if (voice.value == 'south') {
+        voiceName = 'minhquang';
+      }
+
+      if (voice.value == 'north') {
+        voiceName = 'leminh';
+      }
+    } else {
+
+      if (voice.value == 'central') {
+        voiceName = 'myan';
+      }
+
+      if (voice.value == 'south') {
+        voiceName = 'linhsan';
+      }
+
+      if (voice.value == 'north') {
+        voiceName = 'banmai';
+      }
+    }
+    return voiceName;
+  };
 
   const convert = async () => {
-    const response = await textToSpeechApi(text, 'banmai');
-    console.log(response);
+    const requestVoice = handleVoice();
+    const response = await textToSpeechApi(
+      text,
+      requestVoice,
+    );
 
     const audio = new Audio(response.data.async);
-    audio.play();
+    audio.play().then((res) => {
+      console.log('eehehhee');
+    });
   };
   return (
     <div className="container">
@@ -37,16 +79,23 @@ function Home() {
       </div>
 
       <div className="field">
-        <h3 className="field__label">Language</h3>
+        <h3 className="field__label">Accent</h3>
 
         <Select
           isSearchable={false}
-          defaultValue={{
-            label: 'English',
-            value: 'english',
-          }}
           className="field__select"
-          options={options}
+          options={voiceOptions}
+          value={voice}
+          onChange={setVoice}
+        />
+
+        <h3 className="field__label">Gender</h3>
+        <Select
+          isSearchable={false}
+          className="field__select"
+          options={genderOptions}
+          value={gender}
+          onChange={setGender}
         />
       </div>
 
